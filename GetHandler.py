@@ -12,4 +12,4 @@ class GetHandler:
         return data
 
     def Get(self, id):
-        return self.DBConnection.loadAllEntries()
+        return self.DBConnection.QueryDataBase(id)

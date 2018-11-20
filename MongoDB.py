@@ -13,10 +13,10 @@ class MongoDB:
         id = self.collection.insert_one(beaconData)
         print("Item inserted with id: "+ str(id))
 
-    def QueryDataBase(self):
-        return self.mongoQuerier.loadAllEntries
+    def QueryDataBase(self, uid):
+        return self.mongoQuerier.loadAllForUid(uid)
 
     def loadAllEntries(self):
-        return self.collection.find()
+        return self.mongoQuerier.loadAllEntries()
 
 

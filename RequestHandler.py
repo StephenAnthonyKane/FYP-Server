@@ -12,7 +12,8 @@ class MyHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         getHandler = GetHandler()
-        values = getHandler.Handle('test')
+        values = getHandler.Handle('b9407f30-f5f8-466e-aff9-25556b57fe6d')
+        print(values)
         self.send_response(200, values)
         self.send_header('Content-type', 'text/html')
         self.end_headers()

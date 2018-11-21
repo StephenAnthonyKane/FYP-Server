@@ -8,8 +8,11 @@ class GetHandler:
         beaconId = self.Parse(data)
         return self.Get(beaconId)
 
-    def Parse(self, data):
-        return data
+    def Parse(self, query):
+        print(query)
+        #query_components = dict(qc.split("=") for qc in query.split("&"))
+        #print(query_components)
+        return query
 
     def Get(self, id):
         return self.DBConnection.QueryDataBase(id)

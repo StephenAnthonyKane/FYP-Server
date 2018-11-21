@@ -2,6 +2,7 @@
 from PostHandler import PostHandler
 from GetHandler import GetHandler
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import urlparse
 import socketserver
 
 class MyHandler(BaseHTTPRequestHandler):
@@ -12,7 +13,10 @@ class MyHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         getHandler = GetHandler()
-        values = getHandler.Handle('b9407f30-f5f8-466e-aff9-25556b57fe6d')
+
+        query = urlparse(self.path).query
+        values = getHandler.Handle(query)
+
         print(values)
         self.send_response(200, values)
         self.send_header('Content-type', 'text/html')
@@ -29,5 +33,5 @@ class MyHandler(BaseHTTPRequestHandler):
         postHandler = PostHandler()
         postHandler.Handle(post_data)
         
-httpd = socketserver.TCPServer(("", 8080), MyHandler)
+httpd = socketserver.TCPServer(("149.157.121.68", 8080), MyHandler)
 httpd.serve_forever()

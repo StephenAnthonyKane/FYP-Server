@@ -6,11 +6,12 @@ class PostHandler:
         self.DBConnection = MongoDB()
 
     def Handle(self, data):
-        BeaconData = self.Parse(data)
-        self.Save(BeaconData)
+        beaconsDict = self.Parse(data)
+        self.Save(beaconsDict)
 
     def Parse(self, data):
-        return json.loads(data)
+        PostObject = json.loads(data)
+        return json.loads(PostObject['Beacons'])
 
-    def Save(self, BeaconData):
-        self.DBConnection.SaveNewEntry(BeaconData)
+    def Save(self, beaconsDict):
+        self.DBConnection.SaveNewEnteries(beaconsDict)

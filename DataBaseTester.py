@@ -5,10 +5,21 @@ import json
 getHandler = GetHandler()
 postHandler = PostHandler()
 
-x = { "UID": "123456", "URL": "www.test.com","TLM": "", "EID": "", }
-newEntry = json.dumps(x)
-postHandler.Handle(newEntry)
 
-AllRecords = getHandler.Handle(21)
-for x in AllRecords:
-    print(x)
+mylist = [
+    { "UID": "1", "RSS": "1"},
+    { "UID": "2", "RSS": "2"},
+    { "UID": "3", "RSS": "3"},
+    { "UID": "4", "RSS": "4"},
+    { "UID": "5", "RSS": "5"},
+    { "UID": "6", "RSS": "6"},
+    { "UID": "7", "RSS": "7"}
+]
+jarray=  json.dumps(mylist)
+jobj= {"Beacons": jarray}
+
+newEnteries = json.dumps(jobj)
+postHandler.Handle(newEnteries)
+
+AllRecords = getHandler.Handle(1)
+print(AllRecords)

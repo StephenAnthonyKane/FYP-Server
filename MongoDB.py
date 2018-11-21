@@ -1,4 +1,5 @@
 import pymongo
+import json
 from MongoQuerier import MongoQuerier
 
 class MongoDB:
@@ -13,10 +14,14 @@ class MongoDB:
         id = self.collection.insert_one(beaconData)
         print("Item inserted with id: "+ str(id))
 
+    def SaveNewEnteries(self, beaconsDict):
+        self.collection.insert_many(beaconsDict)
+        print("Items inserted")
+
     def QueryDataBase(self, uid):
         return self.mongoQuerier.loadAllForUid(uid)
 
-    def loadAllEntries(self):
+    def LoadAllEntries(self):
         return self.mongoQuerier.loadAllEntries()
 
 

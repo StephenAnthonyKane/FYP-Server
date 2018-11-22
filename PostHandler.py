@@ -11,7 +11,8 @@ class PostHandler:
 
     def Parse(self, data):
         PostObject = json.loads(data)
-        return json.loads(PostObject['Beacons'])
+        print(PostObject)
+        return PostObject['Beacons']
 
     def Save(self, beaconsDict):
         self.DBConnection.SaveNewEnteries(beaconsDict)

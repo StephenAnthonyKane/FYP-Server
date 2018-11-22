@@ -19,7 +19,8 @@ jarray=  json.dumps(mylist)
 jobj= {"Beacons": jarray}
 
 newEnteries = json.dumps(jobj)
-postHandler.Handle(newEnteries)
 
-AllRecords = getHandler.Handle(1)
+postHandler.Handle(jobj)
+
+AllRecords = getHandler.Handle('UID=1')
 print(AllRecords)

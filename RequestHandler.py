@@ -14,13 +14,14 @@ class MyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         getHandler = GetHandler()
 
-        query = urlparse(self.path).query
-        values = getHandler.Handle(query)
+        urlParams = urlparse(self.path).query
+        values = getHandler.Handle(urlParams)
 
         print(values)
-        self.send_response(200, values)
+        self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
+        self.wfile=values
 
     def do_HEAD(self):
         self._set_headers()
@@ -33,5 +34,5 @@ class MyHandler(BaseHTTPRequestHandler):
         postHandler = PostHandler()
         postHandler.Handle(post_data)
         
-httpd = socketserver.TCPServer(("149.157.121.68", 8080), MyHandler)
+httpd = socketserver.TCPServer(("192.168.1.7", 8080), MyHandler)
 httpd.serve_forever()

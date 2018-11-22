@@ -10,6 +10,6 @@ class MongoQuerier:
         print(dumps(cursor))
         return dumps(cursor)
 
-    def loadAllForUid(self, uid):
-        cursor = self.collection.find({ "UID": uid })
+    def loadAllForQuery(self, query):
+        cursor = self.collection.find(query)
         return dumps(cursor)

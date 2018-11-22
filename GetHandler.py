@@ -1,18 +1,18 @@
 from MongoDB import MongoDB
+from urllib import parse
 
 class GetHandler:
     def __init__(self):
         self.DBConnection = MongoDB()
 
     def Handle(self, data):
-        beaconId = self.Parse(data)
-        return self.Get(beaconId)
+        query = self.Parse(data)
+        return self.Get(query)
 
-    def Parse(self, query):
+    def Parse(self, urlParams):
+        query = dict(qc.split("=") for qc in urlParams.split("&"))
         print(query)
-        #query_components = dict(qc.split("=") for qc in query.split("&"))
-        #print(query_components)
         return query
 
-    def Get(self, id):
-        return self.DBConnection.QueryDataBase(id)
+    def Get(self, query):
+        return self.DBConnection.QueryDataBase(query)

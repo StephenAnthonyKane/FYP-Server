@@ -18,8 +18,8 @@ class MongoDB:
         self.collection.insert_many(beaconsDict)
         print("Items inserted")
 
-    def QueryDataBase(self, uid):
-        return self.mongoQuerier.loadAllForUid(uid)
+    def QueryDataBase(self, query):
+        return self.mongoQuerier.loadAllForQuery(query)
 
     def LoadAllEntries(self):
         return self.mongoQuerier.loadAllEntries()

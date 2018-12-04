@@ -1,9 +1,11 @@
 from MongoDB import MongoDB
+from DBSaver import DBSaver
+from datetime import datetime
 import json
 
 class PostHandler:
     def __init__(self):
-        self.DBConnection = MongoDB()
+        self.DBConnection = DBSaver()
 
     def Handle(self, data):
         beaconsDict = self.Parse(data)
@@ -11,8 +13,13 @@ class PostHandler:
 
     def Parse(self, data):
         PostObject = json.loads(data)
-        print(PostObject)
-        return PostObject['Beacons']
+        beaconDataDict = PostObject['Beacons']    
+        timestamp = datetime.now().strftime("%x") +" "+ datetime.now().strftime("%X")
+
+        for beaconData in beaconDataDict:
+            beaconData["Timestamp"] = timestamp
+
+        return beaconDataDict
 
     def Save(self, beaconsDict):
-        self.DBConnection.SaveNewEnteries(beaconsDict)
+        self.DBConnection.SaveBeaconData(beaconsDict)

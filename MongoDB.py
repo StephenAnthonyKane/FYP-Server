@@ -1,27 +1,31 @@
 import pymongo
 import json
-from MongoQuerier import MongoQuerier
+from bson.json_util import dumps
 
 class MongoDB:
-    def __init__(self):
-        self.myclient = pymongo.MongoClient('mongodb://localhost:27017/')
-        self.dataBase = self.myclient["mydatabase"]
-        self.collection = self.dataBase["beacondata"]
+    def __init__(self, clientURL, databaseName):
+        self.myclient = pymongo.MongoClient(clientURL)
+        self.dataBase = self.myclient[databaseName]
 
-        self.mongoQuerier = MongoQuerier(self.collection)
-
-    def SaveNewEntry(self, beaconData):
-        id = self.collection.insert_one(beaconData)
+    def SaveNewEntry(self, collectionName, data):
+        self.GetConnection(collectionName)
+        self.collection.insert_one(data)
         print("Item inserted with id: "+ str(id))
 
-    def SaveNewEnteries(self, beaconsDict):
-        self.collection.insert_many(beaconsDict)
+    def SaveNewEnteries(self, collectionName, dataDict):
+        self.GetConnection(collectionName)
+        self.collection.insert_many(dataDict)
         print("Items inserted")
 
-    def QueryDataBase(self, query):
-        return self.mongoQuerier.loadAllForQuery(query)
+    def loadAllEntries(self, collectionName):
+        self.GetConnection(collectionName)
+        cursor = self.collection.find()
+        return dumps(cursor)
 
-    def LoadAllEntries(self):
-        return self.mongoQuerier.loadAllEntries()
+    def QueryCollection(self, collectionName, query):
+        self.GetConnection(collectionName)
+        cursor = self.collection.find(query)
+        return dumps(cursor)
 
-
+    def GetConnection(self, collectionName):
+        self.collection = self.dataBase[collectionName]

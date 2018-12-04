@@ -2,7 +2,7 @@ from PostHandler import PostHandler
 from GetHandler import GetHandler
 import json
 
-getHandler = GetHandler()
+#getHandler = GetHandler()
 postHandler = PostHandler()
 
 
@@ -20,7 +20,7 @@ jobj= {"Beacons": jarray}
 
 newEnteries = json.dumps(jobj)
 
-postHandler.Handle(jobj)
+postHandler.Handle(newEnteries)
 
-AllRecords = getHandler.Handle('UID=1')
-print(AllRecords)
+#AllRecords = getHandler.Handle('UID=1')
+#print(AllRecords)

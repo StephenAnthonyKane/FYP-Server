@@ -34,5 +34,5 @@ class MyHandler(BaseHTTPRequestHandler):
         postHandler = PostHandler()
         postHandler.Handle(post_data)
         
-httpd = socketserver.TCPServer(("192.168.1.7", 8080), MyHandler)
+httpd = socketserver.TCPServer(("192.168.1.21", 8080), MyHandler)
 httpd.serve_forever()

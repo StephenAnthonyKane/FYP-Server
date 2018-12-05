@@ -17,7 +17,7 @@ class MongoDB:
         self.collection.insert_many(dataDict)
         print("Items inserted")
 
-    def loadAllEntries(self, collectionName):
+    def LoadAllEntries(self, collectionName):
         self.GetConnection(collectionName)
         cursor = self.collection.find()
         return dumps(cursor)

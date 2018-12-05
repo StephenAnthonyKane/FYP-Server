@@ -1,9 +1,10 @@
 from MongoDB import MongoDB
+from DBRetriever import DBRetriever
 from urllib import parse
 
 class GetHandler:
     def __init__(self):
-        self.DBConnection = MongoDB()
+        self.DBConnection = DBRetriever()
 
     def Handle(self, data):
         query = self.Parse(data)
@@ -15,4 +16,4 @@ class GetHandler:
         return query
 
     def Get(self, query):
-        return self.DBConnection.QueryDataBase(query)
+        return self.DBConnection.GetBeaconData(query)

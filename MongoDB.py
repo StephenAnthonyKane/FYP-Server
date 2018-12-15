@@ -28,4 +28,4 @@ class MongoDB:
         return dumps(cursor)
 
     def GetConnection(self, collectionName):
-        self.collection = self.dataBase[collectionName]
+        self.collection = self.dataBase[str(collectionName)]

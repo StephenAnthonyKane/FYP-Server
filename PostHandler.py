@@ -7,17 +7,18 @@ class PostHandler:
     def __init__(self):
         self.DBConnection = DBSaver()
 
-    def Handle(self, data):
-        beaconsDict = self.Parse(data)
+    def Handle(self, arguments):
+        beaconsDict = self.Parse(arguments)
         self.Save(beaconsDict)
 
-    def Parse(self, data):
-        PostObject = json.loads(data)
-        beaconDataDict = PostObject['Beacons']    
+    def Parse(self, arguments):
+        PostObject = arguments['Beacons']
+        beaconDataDict = json.loads(PostObject)
         timestamp = datetime.now().strftime("%x") +" "+ datetime.now().strftime("%X")
 
         for beaconData in beaconDataDict:
             beaconData["Timestamp"] = timestamp
+            print(beaconData)
 
         return beaconDataDict
 

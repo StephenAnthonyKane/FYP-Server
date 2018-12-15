@@ -1,17 +1,16 @@
 from MongoDB import MongoDB
 from DBRetriever import DBRetriever
-from urllib import parse
 
 class GetHandler:
     def __init__(self):
         self.DBConnection = DBRetriever()
 
-    def Handle(self, data):
-        query = self.Parse(data)
+    def Handle(self, arguments):
+        query = self.Parse(arguments)
         return self.Get(query)
 
-    def Parse(self, urlParams):
-        query = dict(qc.split("=") for qc in urlParams.split("&"))
+    def Parse(self, arguments):
+        query = arguments["UID"]
         print(query)
         return query
 

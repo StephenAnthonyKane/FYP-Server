@@ -5,7 +5,11 @@ class LocationCalculator:
         self.Logger = FileLogger()
 
     def Locate(self, RetrivedData):
-        return self.GetRSS(RetrivedData)
+        try:
+            self.Logger.Info(RetrivedData)
+            return self.GetRSS(RetrivedData)
+        except Exception as e:
+            self.Logger.Error("ERROR in LocationCalculator: "+str(e))
 
     def GetRSS(self, RetrivedData):
         beaconsRSS = []
@@ -16,7 +20,8 @@ class LocationCalculator:
 
                 totalRSS =0
                 for b in beaconsFound:
-                    totalRSS += int(b['RSS'])
+                    if "RSS" in b:
+                        totalRSS += int(b['RSS'])
             
                 newBeaconRSS = {"UID": beacon['UID'], "RSS": totalRSS/len(beaconsFound)}
                 beaconsRSS.append(newBeaconRSS)

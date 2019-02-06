@@ -15,16 +15,51 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    ctx.beginPath();
+    ctx.arc(245, 25, 10, 0, Math.PI * 2, true);
+    ctx.fillStyle = "Green";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(620, 25, 10, 0, Math.PI * 2, true);
+    ctx.fillStyle = "Green";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(245, 470, 10, 0, Math.PI * 2, true);
+    ctx.fillStyle = "Green";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(620, 470, 10, 0, Math.PI * 2, true);
+    ctx.fillStyle = "Green";
+    ctx.fill();
+
+    
+
+
+
     $('#submitCreate').click(function () {
         console.log("Running POST")
 
+        var UID = $('#PostUID').val();
+        var RSS = $('#PostRSS').val();
+        
+        /*
         var data = {"Beacons":[
             { "UID":"4", "RSS":"1" },
             { "UID":"4", "RSS":"2" },
             { "UID":"4", "RSS":"4" },
             { "UID":"4", "RSS":"5"}
           ]}
-
+        */
+       var data = {"Beacons":[
+            { "UID": UID, "RSS": RSS }]
+        }
+        console.log(data)
         // process the form
         $.ajax({
             type: "POST",

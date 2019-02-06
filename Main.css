@@ -49,3 +49,10 @@ div.panel {
     font-size: xx-large;
     margin: auto;
 }
+
+.Map{
+    background-image: url("finalYearLab.PNG");
+    background-repeat: no-repeat;
+    margin: auto;
+    width: 100%
+}

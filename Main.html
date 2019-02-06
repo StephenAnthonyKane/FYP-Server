@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Assignment 5</title>
@@ -9,17 +10,19 @@
     <script src="Main.js"></script>
 
 </head>
+
 <body>
     <div class="Content">
+
         <button class="accordion" id="create">Create</button><br>
         <div class="panel" id="create-panel">
             <div id="create-form" class="formsytle">
                 <label>UID:</label><br>
-                <input type="text" name="UID" value="Enter Value"><br>
+                <input id="PostUID" type="text" name="UID" value="Enter Value"><br>
                 <br>
 
                 <label>RSS:</label><br>
-                <input type="text" name="RSS" value="Enter Value"><br>
+                <input id="PostRSS" type="text" name="RSS" value="Enter Value"><br>
                 <br>
 
                 <button id="submitCreate">POST</button>
@@ -37,6 +40,16 @@
             </div>
         </div>
 
+        <div style="display:none;">
+            <img id="source" src="finalYearLab.PNG">
+        </div>
+
+        <div class="Map">
+            <canvas id="myCanvas" width="890" height="487" style="border:1px solid #ff14e3;"></canvas>
+        </div>
+
+
     </div>
 </body>
+
 </html>

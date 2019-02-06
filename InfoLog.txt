@@ -1,0 +1,36 @@
+[17:50:27]Get request server
+[17:50:42]Get request server
+[17:53:43]Get request server
+[17:58:54]Get request received
+[18:24:03]Unknown Request
+[18:24:32]Unknown Request
+[21:21:25]Get request received
+[21:26:13]Get request received
+[21:26:13]POST request recived
+[21:28:33]Get request received
+[21:28:33]POST request recived
+[21:29:29]Get request received
+[22:19:05]POST request received
+[22:19:05]POST request recived
+[22:24:34]Get request received
+[22:24:41]POST request received
+[22:43:54]POST request received
+[22:44:11]POST request received
+[22:46:45]POST request received
+[22:53:49]POST request received
+[22:53:49]FieldStorage(None, None, [])
+[23:12:10]GET request received
+[23:13:43]GET request received
+[23:13:54]GET request received
+[23:17:13]POST request received
+[23:17:13]FieldStorage(None, None, [])
+[23:18:17]GET request received
+[23:26:23]GET request received
+[23:27:03]GET request received
+[23:27:17]GET request received
+[23:27:42]GET request received
+[23:28:49]GET request received
+[23:28:54]GET request received
+[23:50:30]POST request received
+[23:50:30]FieldStorage(None, None, '{"Beacons":[{"UID":"2","RSS":"1"},{"UID":"2","RSS":"2"},{"UID":"2","RSS":"3"}]}')
+[23:50:48]GET request received

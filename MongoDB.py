@@ -1,6 +1,7 @@
 import pymongo
 import json
-from bson.json_util import dumps
+
+
 
 class MongoDB:
     def __init__(self, clientURL, databaseName):
@@ -10,7 +11,7 @@ class MongoDB:
     def SaveNewEntry(self, collectionName, data):
         self.GetConnection(collectionName)
         self.collection.insert_one(data)
-        print("Item inserted with id: "+ str(id))
+        print("Item inserted with id: " + str(id))
 
     def SaveNewEnteries(self, collectionName, dataDict):
         self.GetConnection(collectionName)
@@ -20,12 +21,12 @@ class MongoDB:
     def LoadAllEntries(self, collectionName):
         self.GetConnection(collectionName)
         cursor = self.collection.find()
-        return dumps(cursor)
+        return cursor
 
     def QueryCollection(self, collectionName, query):
         self.GetConnection(collectionName)
-        cursor = self.collection.find(query)
-        return dumps(cursor)
+        cursor = self.collection.find(query, {"_id":0})
+        return cursor
 
     def GetConnection(self, collectionName):
         self.collection = self.dataBase[str(collectionName)]

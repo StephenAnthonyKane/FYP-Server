@@ -11,5 +11,5 @@ class DBSaver:
         for beaconData in beaconDataDict:
             self.connection.SaveNewEntry(str(beaconData['UID']), beaconData)
         #Save into master
-        self.connection.SaveNewEnteries("beacondata", beaconDataDict)
+        self.connection.SaveNewEnteries("allbeacondata", beaconDataDict)
         #Save into timed collection

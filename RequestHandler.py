@@ -2,29 +2,33 @@
 
 from GetHandler import GetHandler
 from PostHandler import PostHandler
-import time
+from FileLogger import FileLogger
+import json
 import cgi
 import cgitb
 import os
 
 cgitb.enable()
 arguments = cgi.FieldStorage()
-requestMethod = os.environ['REQUEST_METHOD']
 
-print("Content-Type: text/html\r\n\r\n")
-print("<html><body>")
-print('<p>'+requestMethod+'</p>')
+requestMethod = os.environ['REQUEST_METHOD']
+#requestMethod = 'GET'
+
+#print("Content-Type: text/html\r\n\r\n")
+#print("<html><body>")
+#print('<p>'+requestMethod+'</p>')
+
+print("Content-type: application/json")
+print
 
 if(requestMethod == 'GET'):
-   print('GET request recived')
    getHandler = GetHandler()
-   t = getHandler.Handle(arguments)
-   print(t)
+   result = getHandler.Handle(arguments)
+   print(json.dumps(result))
 
 if(requestMethod == 'POST'):
-   print('POST request recived')
    postHandler = PostHandler()
    postHandler.Handle(arguments)
+   print('{ "Success":"true"}')
 
-print("</body></html>")
-
+#print("</body></html>")

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 5</title>
+
+    <link rel="stylesheet" href="Main.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.0.min.js"></script>
+    <script src="Main.js"></script>
+
+</head>
+<body>
+    <div class="Content">
+        <button class="accordion" id="create">Create</button><br>
+        <div class="panel" id="create-panel">
+            <div id="create-form" class="formsytle">
+                <label>UID:</label><br>
+                <input type="text" name="UID" value="Enter Value"><br>
+                <br>
+
+                <label>RSS:</label><br>
+                <input type="text" name="RSS" value="Enter Value"><br>
+                <br>
+
+                <button id="submitCreate">POST</button>
+            </div>
+        </div>
+
+        <button class="accordion" id="recall">Recall</button><br>
+        <div class="panel" id="recall-panel">
+            <div id="recall-form1" class="formsytle">
+                <label>UID:</label><br>
+                <input id="Uid" type="text" name="UID" value="-"><br>
+                <br>
+
+                <button id="submitGet">GET</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

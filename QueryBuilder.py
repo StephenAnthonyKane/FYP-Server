@@ -3,6 +3,8 @@ import time
 
 
 class QueryBuilder:
+    def __init__(self):
+        self.Logger = FileLogger()
 
     def Build(self, arguments):
         queryObject = {}
@@ -11,10 +13,13 @@ class QueryBuilder:
         return queryObject
 
     def GetFilter(self, arguments):
+        self.Logger.Info(arguments)
         query = {}
         for key in arguments:
             if key == 'Offset':
-                query['Timestamp'] = '{$gte:' + str(int(time.time()) - (int(arguments[key]) * 60) ) + '}'
+                if (int(arguments[key])) == 0:
+                    continue
+                query['Timestamp'] = {'$gte': (int(time.time()) - (int(arguments[key]) * 60) ) }
                 continue
             query[key] = arguments[key]
         return query

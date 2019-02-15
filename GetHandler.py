@@ -1,21 +1,18 @@
-from DBRetriever import DBRetriever
 from FileLogger import FileLogger
-from LocationCalculator import LocationCalculator
+from DataManager import DataManager
+
 
 
 class GetHandler:
     def __init__(self):
-        self.DBConnection = DBRetriever()
+        self.DataManager = DataManager()
         self.Logger = FileLogger()
-        self.Locator = LocationCalculator()
 
     def Handle(self, arguments):
         try:
             self.Logger.Info("GET request received")
             parameters = self.Parse(arguments)
-            RetrivedData = self.GetData(parameters)
-            beaconRSS = self.Locate(RetrivedData)
-            return beaconRSS
+            return self.GetData(parameters)
         except Exception as e:
             self.Logger.Error(e)
 
@@ -26,7 +23,4 @@ class GetHandler:
         return params
 
     def GetData(self, parameters):
-        return self.DBConnection.GetBeaconData(parameters)
-
-    def Locate(self, RetrivedData):
-        return self.Locator.Locate(RetrivedData)
+        return self.DataManager.Manage(parameters)

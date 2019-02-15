@@ -65,41 +65,85 @@ $(document).ready(function () {
     ctx.fillText("UID: 4", 630, 455);
     ctx.fillText("RSS: 4", 630, 470);
 
-    setInterval(sendGetRequest, 2000, "allbeacondata", 2);
+    setInterval(getBeaconData, 2000);
 
-    function sendGetRequest(DeviceID, OffSet) {
+    function getBeaconData (){
+        queryString = "DeviceID=allbeacondata&Offset=2";
+        beacons = sendGetRequest(queryString);
+        displayData(beacons)
+    }
+
+    function sendGetRequest(queryString) {
         console.log("Running GET")
 
-        var URL = "RequestHandler.py?DeviceID=" + DeviceID + "&Offset=" + OffSet
+        var value ={};
+        var URL = "RequestHandler.py?"+queryString;
         $.ajax({
             type: "GET",
             dataType: "json",
             url: URL,
             contentType: "application/json; charset=utf-8",
+            async: false,
             success: function (data) {
                 console.log(data);
-                displayData(data)
+                value = data;
             },
             error: function (data) {
                 console.log(data);
             },
 
         });
-        return;
+        return value;
+        
     }
 
     function displayData(data) {
+        console.log('Here')
+        console.log(data)
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
 
-        fillCanvas(canvas, ctx);
+        //Clear Canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        //Get Closest
         var closest = { "UID": 0, "RSS": Number.MIN_SAFE_INTEGER }
         data.forEach(beacon=> {
             if(beacon['RSS'] > closest['RSS']){
                 closest = beacon;
             }
         })
+
+        console.log(closest)
+        
+
+        data.forEach(beacon =>{
+            
+            beaconInfoObject = getBeaconInfo(beacon['UID']);
+            beaconInfo = beaconInfoObject[0];
+            console.log(beaconInfo);
+
+            //Draw Circle
+            if(closest['UID'] == beacon['UID']){ctx.fillStyle = "Green";}else{ctx.fillStyle = "Red";}
+            
+            ctx.fillStyle = "Green";
+            ctx.beginPath();
+            ctx.arc(beaconInfo['Xcord'], beaconInfo['Ycord'], 10, 0, Math.PI * 2, true);
+            ctx.fill();
+
+            //Draw TextBox
+            ctx.fillStyle = "White"
+            ctx.fillRect(beaconInfo['Xcord']+10, beaconInfo['Ycord'], 280, 30);
+
+            //Draw Text
+            ctx.fillStyle = "Black"
+            ctx.font = "15px Arial";
+            ctx.fillText("UID: " + String(beacon['UID']), beaconInfo['Xcord']+10, beaconInfo['Ycord']+10);
+            ctx.fillText("RSS: " + String(beacon['RSS']), beaconInfo['Xcord']+10, beaconInfo['Ycord']+25);
+        });
+
+        /*
+        fillCanvas(canvas, ctx);
 
         data.forEach(beacon => {
             ctx.fillStyle = "Black"
@@ -156,6 +200,12 @@ $(document).ready(function () {
                 ctx.fillText("RSS: " + beacon['RSS'], 630, 470);
             }
         });
+        */
+    }
+
+    function getBeaconInfo(beaconID){
+        queryString = "BeaconID="+beaconID;
+        return sendGetRequest(queryString);
     }
 
     function fillCanvas(canvas, ctx) {

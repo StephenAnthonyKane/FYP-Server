@@ -1,5 +1,4 @@
 from MongoDB import MongoDB
-from QueryBuilder import QueryBuilder
 from FileLogger import FileLogger
 from bson.json_util import dumps
 import json
@@ -8,17 +7,13 @@ import json
 class DBRetriever:
     def __init__(self):
         self.connection = MongoDB('mongodb://localhost:27017/', "mydatabase")
-        self.QueryBuilder = QueryBuilder()
         self.Logger = FileLogger()
 
-    def GetBeaconData(self, parameters):
-        queryObject = self.QueryBuilder.Build(parameters)
-        self.Logger.Info('Query: '+str(queryObject['Filter']))
-        cursor = self.connection.QueryCollection(queryObject['CollectionName'], queryObject['Filter'])
+    def QueryDatabase(self, collectionName, filter):
+        self.Logger.Info('CollectionName: ' + collectionName + ' Query: '+str(filter))
+        cursor = self.connection.QueryCollection(collectionName, filter)
+        #cursor = self.connection.LoadAllEntries(collectionName)
         return self.ParseCursor(cursor)
-
-    def GetAllBeaconData(self, beaconId):
-        return self.connection.LoadAllEntries(beaconId)
 
     def ParseCursor(self, cursor):
         cursorList = list(cursor)
@@ -27,4 +22,6 @@ class DBRetriever:
             beaconJSON = dumps(beaconCursor)
             beaconObject = json.loads(beaconJSON)
             parsedData.append(beaconObject)
+
+        self.Logger.Info('ReturnedData: '+str(parsedData))
         return parsedData
